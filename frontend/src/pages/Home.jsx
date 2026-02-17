@@ -11,29 +11,15 @@ import {
   X,
   ChevronRight,
   Volume2,
-  Palette,
-  BookOpen,
-  Rocket,
-  Star,
 } from 'lucide-react';
-import { productData, testimonials, showcaseScenes, resultVideos } from '../mock';
 
-const iconMap = {
-  'play-circle': PlayCircle,
-  film: Film,
-  camera: Camera,
-  zap: Zap,
-  sparkles: Sparkles,
-  'volume-2': Volume2,
-  palette: Palette,
-  'book-open': BookOpen,
-};
+import { productData, testimonials, showcaseScenes, resultVideos, bonuses } from '../mock';
 
 const KIWIFY_CHECKOUT_URL = 'https://pay.kiwify.com.br/FGAsVK2'; // Plataforma
 const KIWIFY_CHECKOUT_PLUGIN_URL = 'https://pay.kiwify.com.br/7t7Vix1'; // Plataforma + Plugin
 
 const OFFER_SECTION_ANCHOR = 'oferta';
-const OFFER_SECTION_BONUS_ANCHOR = 'bonus';
+const BONUS_SECTION_ANCHOR = 'bonus';
 
 export const Home = () => {
   const handleScroll = (id) => (e) => {
@@ -47,7 +33,6 @@ export const Home = () => {
     }
   };
 
-  // Tracking params Kiwify
   useEffect(() => {
     const params = window.location.search;
 
@@ -76,7 +61,7 @@ export const Home = () => {
       `}</style>
 
       {/* =========================
-          1) HERO (Hormozi)
+          1) HERO
          ========================= */}
       <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-black to-black" />
@@ -168,7 +153,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          2) PROBLEMA (Hormozi)
+          2) PROBLEMA
          ========================= */}
       <section className="py-16 px-4 bg-zinc-950">
         <div className="container mx-auto max-w-6xl">
@@ -224,7 +209,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          3) DEMO / EXEMPLOS (prova visual)
+          3) DEMO / EXEMPLOS
          ========================= */}
       <section className="py-20 px-4 bg-gradient-to-b from-black via-zinc-950 to-black relative overflow-hidden">
         <div className="hidden md:block absolute inset-0 opacity-10 pointer-events-none">
@@ -244,7 +229,7 @@ export const Home = () => {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 px-4">
-            {showcaseScenes.slice(0, 4).map((scene, index) => (
+            {showcaseScenes.map((scene, index) => (
               <div
                 key={scene.id}
                 className="group relative"
@@ -258,15 +243,7 @@ export const Home = () => {
                     <div className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/19.5]">
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-zinc-900 rounded-b-2xl z-10"></div>
 
-                      <video
-                        className="w-full h-full object-cover"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="metadata"
-                        loading="lazy"
-                      >
+                      <video className="w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata">
                         <source src={scene.videoUrl} type="video/mp4" />
                       </video>
 
@@ -294,8 +271,7 @@ export const Home = () => {
               </h3>
 
               <p className="text-gray-400 text-base md:text-lg max-w-3xl mx-auto mb-10">
-                Veja o painel funcionando dentro do After Effects / Premiere: pré-visualização, seleção e aplicação
-                rápida.
+                Veja o painel funcionando dentro do After Effects / Premiere: pré-visualização, seleção e aplicação rápida.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -348,7 +324,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          4) MECANISMO ÚNICO (Hormozi)
+          4) MECANISMO
          ========================= */}
       <section className="py-20 px-4 bg-zinc-950">
         <div className="container mx-auto max-w-5xl">
@@ -386,7 +362,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          5) RESULTADOS (mantém TODOS do array)
+          5) RESULTADOS
          ========================= */}
       <section className="py-24 px-4 bg-zinc-950 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] pointer-events-none"></div>
@@ -459,196 +435,79 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          6) O QUE TEM DENTRO (sem treinos/scripts)
+          6) BÔNUS (RESTaurado)
          ========================= */}
-      <section className="py-20 px-4 bg-black">
-        <div className="container mx-auto max-w-6xl">
-          <h3 className="text-3xl md:text-4xl font-bold mb-12 text-center text-white">
-            O que tem dentro da <span className="text-blue-600">Plataforma</span>
-          </h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-blue-600/30 transition-all">
-              <PlayCircle className="h-10 w-10 text-blue-600 mb-4" />
-              <h4 className="text-xl font-bold text-white mb-2">Biblioteca de cenas (+200)</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Cenas cinematográficas prontas para usar, separadas por estilo e objetivo na edição.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-blue-600/30 transition-all">
-              <Film className="h-10 w-10 text-blue-600 mb-4" />
-              <h4 className="text-xl font-bold text-white mb-2">Área de referências</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Referências rápidas para destravar criação e bater consistência visual.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-blue-600/30 transition-all">
-              <Camera className="h-10 w-10 text-blue-600 mb-4" />
-              <h4 className="text-xl font-bold text-white mb-2">Organização por temas</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Categorias prontas para cada tipo de vídeo, cena e objetivo (impacto, transição, emoção etc.).
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-blue-600/30 transition-all">
-              <Volume2 className="h-10 w-10 text-blue-600 mb-4" />
-              <h4 className="text-xl font-bold text-white mb-2">Biblioteca de músicas virais</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Repertório pronto para acelerar escolhas e manter ritmo/retenção.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-blue-600/30 transition-all">
-              <Sparkles className="h-10 w-10 text-blue-600 mb-4" />
-              <h4 className="text-xl font-bold text-white mb-2">Atualizações</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                Novas cenas e organização contínua para o acervo não “morrer” com o tempo.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-xl bg-blue-600/5 border border-blue-600/20 hover:border-blue-600/50 transition-all shadow-[0_0_20px_rgba(37,99,235,0.06)]">
-              <Zap className="h-10 w-10 text-blue-500 mb-4" />
-              <h4 className="text-xl font-bold text-white mb-2">Aplicação em 1 clique (Plugin)</h4>
-              <p className="text-gray-300 text-sm leading-relaxed">
-                Para quem quer o workflow mais rápido: selecionar e aplicar direto no Premiere/After.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================
-          7) SEM vs COM
-         ========================= */}
-      <section className="py-20 px-4 bg-zinc-950">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-bold mb-6 text-center lg:text-left">
-                Sem o Arsenal Cinematográfico você vai...
-              </h3>
-              {productData.withoutPack.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start space-x-3 bg-red-950/20 p-4 rounded-lg border border-red-900/30"
-                >
-                  <X className="h-6 w-6 text-red-500 flex-shrink-0 mt-1" />
-                  <span className="text-gray-300">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-2xl md:text-3xl font-bold mb-2 text-center lg:text-left">
-                Com a Plataforma você vai...
-              </h3>
-
-              <p className="text-gray-400 text-sm text-center lg:text-left mb-4">
-                (e com a opção Plataforma + Plugin, você acelera ainda mais com aplicação em 1 clique.)
-              </p>
-
-              <div className="flex items-start space-x-3 bg-green-950/40 p-4 rounded-lg border border-green-500/50 shadow-lg shadow-green-500/10">
-                <Check className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
-                <span className="text-gray-100 font-medium">
-                  Ter um arsenal pronto para aplicar em minutos, com consistência e estética de cinema.
-                </span>
-              </div>
-
-              {productData.withPack.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start space-x-3 bg-green-950/20 p-4 rounded-lg border border-green-900/30"
-                >
-                  <Check className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
-                  <span className="text-gray-300">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================
-          8) BÔNUS (restaurado - Hormozi stack)
-         ========================= */}
-      <section id={OFFER_SECTION_BONUS_ANCHOR} className="py-24 px-4 bg-zinc-950 overflow-hidden relative">
+      <section id={BONUS_SECTION_ANCHOR} className="py-24 px-4 bg-zinc-950 overflow-hidden relative">
         <div className="hidden md:block absolute top-1/4 left-0 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
         <div className="hidden md:block absolute bottom-1/4 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="container mx-auto max-w-5xl relative z-10">
           <div className="text-center mb-16">
             <Badge className="bg-blue-600/10 text-blue-500 border-blue-600/20 mb-6 px-4 py-1 text-base uppercase tracking-wider font-bold">
-              Stack de Valor
+              Bônus Exclusivos
             </Badge>
-            <h3 className="text-4xl md:text-5xl font-black mb-6 text-white tracking-tight leading-tight uppercase">
-              Exclusividades do <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700">PLATAFORMA + PLUGIN</span>
+
+            <h3 className="text-3xl md:text-5xl font-black mb-6 text-white tracking-tight leading-tight uppercase">
+              O que você leva <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700">GRÁTIS</span> no plano{' '}
+              <span className="text-blue-500">Plataforma + Plugin</span>
             </h3>
-            <p className="text-gray-400 text-xl max-w-2xl mx-auto leading-relaxed">
-              Materiais profissionais que você recebe <span className="text-blue-500 font-bold border-b border-blue-600/50">sem custo adicional</span> ao escolher a oferta mais vendida.
+
+            <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+              Você não está comprando só o plugin. Você está comprando um <b>workflow completo</b> com assets que elevam o acabamento final.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6">
-            {[
-              {
-                title: 'Pack de Efeitos Sonoros Cinematográficos',
-                desc: 'Impactos, transições e ambientes para elevar a imersão e finalizar com estética premium.',
-                price: 'R$ 97,00',
-                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
-              },
-              {
-                title: 'Pack de LUTs Cinematográficas',
-                desc: 'Looks prontos para dar tom de cinema em segundos e manter consistência visual.',
-                price: 'R$ 69,00',
-                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
-              },
-              {
-                title: 'Biblioteca de Hooks & Estruturas',
-                desc: 'Estruturas prontas para acelerar criação, prender atenção e manter ritmo.',
-                price: 'R$ 80,00',
-                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
-              },
-              {
-                title: 'Pack de Overlays (Impacto & Acabamento)',
-                desc: 'Overlays e elementos para dar acabamento, dinamismo e impacto visual.',
-                price: 'R$ 47,00',
-                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
-              },
-            ].map((b, idx) => (
+          <div className="flex flex-col gap-10">
+            {bonuses.map((bonus, index) => (
               <div
-                key={idx}
+                key={index}
                 className="group relative bg-zinc-900/40 border border-blue-600/30 rounded-3xl p-6 md:p-10 overflow-hidden transition-all duration-500 hover:bg-zinc-900/60 shadow-[0_0_30px_rgba(37,99,235,0.06)]"
               >
                 <div className="hidden md:block absolute -right-20 -bottom-20 w-[500px] h-[500px] bg-blue-700 blur-[120px] rounded-full pointer-events-none mix-blend-screen opacity-10 group-hover:opacity-20 transition-all duration-700"></div>
 
-                <div className="relative z-10 flex flex-col gap-5">
-                  <div className="flex items-center gap-3">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600/20 text-blue-500 font-bold text-sm border border-blue-600/20">
-                      {idx + 1}
-                    </span>
-                    <span className="text-blue-600 font-bold tracking-wider text-sm uppercase">{b.tag}</span>
+                <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
+                  <div className="flex-1 flex flex-col items-start text-left space-y-4">
+                    <div className="flex items-center gap-3">
+                      <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600/20 text-blue-500 font-bold text-sm border border-blue-600/20">
+                        {index + 1}
+                      </span>
+                      <span className="text-blue-600 font-bold tracking-wider text-sm uppercase">
+                        Exclusivo do plano Plataforma + Plugin
+                      </span>
+                    </div>
+
+                    <h4 className="text-2xl md:text-4xl font-bold text-white uppercase italic leading-tight">
+                      {bonus.title}
+                    </h4>
+
+                    <div className="space-y-2 border-l-2 border-zinc-800 pl-4 text-gray-400 text-base md:text-lg">
+                      {bonus.description.split('\n').map((linha, i) => {
+                        const textoLimpo = linha.replace(/^- /, '').trim();
+                        if (!textoLimpo) return null;
+
+                        return (
+                          <div key={i} className="flex items-start gap-2">
+                            <span className="text-blue-600 font-bold">+</span>
+                            <span>{textoLimpo}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <div className="pt-2">
+                      <div className="inline-flex items-center font-black text-xs px-5 py-2.5 rounded-lg border bg-blue-600 text-white border-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.35)] uppercase">
+                        <Check className="w-4 h-4 mr-2" />
+                        Incluso no plano de R$ 87
+                      </div>
+                    </div>
                   </div>
 
-                  <h4 className="text-2xl md:text-4xl font-bold text-white uppercase italic leading-tight">
-                    {b.title}
-                  </h4>
-
-                  <p className="text-gray-400 text-lg leading-relaxed max-w-3xl">{b.desc}</p>
-
-                  <div className="pt-2 flex flex-wrap items-center gap-4">
-                    <div className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2">
-                      <span className="text-gray-500 text-[10px] uppercase block mb-1 font-medium">
-                        Valor Individual
-                      </span>
-                      <span className="text-xl font-bold text-gray-500 line-through italic">{b.price}</span>
-                    </div>
-
-                    <div className="flex items-center font-black text-xs px-5 py-2.5 rounded-lg border bg-blue-600 text-white border-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.35)] uppercase">
-                      <Check className="w-4 h-4 mr-2" />
-                      INCLUSO NO PLATAFORMA + PLUGIN
-                    </div>
+                  <div className="flex-shrink-0 w-full md:w-[40%] flex justify-center items-center">
+                    <img
+                      src={bonus.image}
+                      alt={bonus.title}
+                      className="w-full max-w-[260px] md:max-w-[320px] aspect-square object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-transform duration-700 group-hover:scale-105"
+                    />
                   </div>
                 </div>
               </div>
@@ -659,9 +518,9 @@ export const Home = () => {
             <a
               href={`#${OFFER_SECTION_ANCHOR}`}
               onClick={handleScroll(OFFER_SECTION_ANCHOR)}
-              className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black text-sm sm:text-lg px-6 sm:px-10 py-4 sm:py-6 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-600/50 w-full sm:w-auto"
+              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-black text-sm sm:text-lg px-6 sm:px-10 py-4 sm:py-6 rounded-full transition-all duration-300 hover:scale-105 shadow-[0_10px_30px_rgba(37,99,235,0.35)] w-full sm:w-auto"
             >
-              QUERO A OFERTA MAIS VENDIDA
+              QUERO GARANTIR O PLANO COMPLETO
               <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
             </a>
           </div>
@@ -669,7 +528,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          9) OFERTA (2 cards)
+          7) OFERTA
          ========================= */}
       <section id={OFFER_SECTION_ANCHOR} className="py-24 px-4 bg-black">
         <div className="container mx-auto max-w-6xl">
@@ -739,7 +598,7 @@ export const Home = () => {
               <p className="text-center text-zinc-500 text-xs mt-3">Acesso imediato</p>
             </div>
 
-            {/* CARD 2 — PLATAFORMA + PLUGIN — VALUE STACK */}
+            {/* CARD 2 — PLATAFORMA + PLUGIN */}
             <div
               id="plano-plugin"
               className="relative bg-zinc-900 border-2 border-blue-600 rounded-[2.5rem] p-8 sm:p-10 flex flex-col shadow-[0_0_50px_rgba(37,99,235,0.25)]"
@@ -763,70 +622,25 @@ export const Home = () => {
                 </p>
               </div>
 
-              {/* Value Stack */}
               <div className="space-y-4 flex-1 text-sm">
                 <div className="flex items-center gap-3 text-white font-bold">
                   <Zap className="h-5 w-5 text-blue-600" /> Inclui tudo da Plataforma
                 </div>
 
-                <div className="mt-2 p-5 rounded-2xl border border-blue-600/25 bg-blue-600/5">
-                  <p className="text-white font-black uppercase text-xs tracking-widest mb-3">Stack de Valor</p>
+                <div className="flex items-center gap-3 text-gray-200">
+                  <Check className="h-5 w-5 text-green-500" /> Plugin Premiere + After Effects (1 clique)
+                </div>
 
-                  <div className="space-y-3">
-                    <div className="flex items-start gap-3 text-gray-100">
-                      <span className="text-blue-500 font-black">⚡</span>
-                      <span>
-                        <b>Plugin Premiere + After Effects</b> (1 clique)
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-100">
-                      <span className="text-blue-500 font-black">⚡</span>
-                      <span>
-                        <b>Pack Efeito Sonoro</b> (finalização cinematográfica)
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-100">
-                      <span className="text-blue-500 font-black">⚡</span>
-                      <span>
-                        <b>Pack de LUTs</b> (look de cinema rápido)
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-100">
-                      <span className="text-blue-500 font-black">⚡</span>
-                      <span>
-                        <b>Biblioteca de Hooks & Estruturas</b> (atalho criativo)
-                      </span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-100">
-                      <span className="text-blue-500 font-black">⚡</span>
-                      <span>
-                        <b>Pack de Overlays</b> (acabamento e impacto)
-                      </span>
-                    </div>
+                <div className="flex items-center gap-3 text-gray-200">
+                  <Check className="h-5 w-5 text-green-500" /> Bônus Exclusivos (SFX + LUTs + Overlays)
+                </div>
 
-                    <div className="h-px bg-zinc-800 my-2" />
+                <div className="flex items-center gap-3 text-gray-200">
+                  <Check className="h-5 w-5 text-green-500" /> Acesso vitalício
+                </div>
 
-                    <div className="flex items-start gap-3 text-gray-200">
-                      <span className="text-green-500 font-black">✔</span>
-                      <span>Biblioteca de cenas (+200)</span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-200">
-                      <span className="text-green-500 font-black">✔</span>
-                      <span>Biblioteca de músicas virais</span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-200">
-                      <span className="text-green-500 font-black">✔</span>
-                      <span>Área de referências</span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-200">
-                      <span className="text-green-500 font-black">✔</span>
-                      <span>Acesso vitalício</span>
-                    </div>
-                    <div className="flex items-start gap-3 text-gray-200">
-                      <span className="text-green-500 font-black">✔</span>
-                      <span>Garantia de 7 dias</span>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-3 text-gray-200">
+                  <Check className="h-5 w-5 text-green-500" /> Garantia de 7 dias
                 </div>
 
                 <p className="text-blue-100/80 text-xs leading-relaxed">
@@ -844,9 +658,7 @@ export const Home = () => {
                 <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 ml-1 animate-pulse" />
               </a>
 
-              <p className="text-center text-blue-200 text-xs mt-3 font-semibold">
-                Melhor custo-benefício • Oferta mais vendida
-              </p>
+              <p className="text-center text-blue-200 text-xs mt-3 font-semibold">Melhor custo-benefício</p>
             </div>
           </div>
 
@@ -864,7 +676,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          10) PROVA SOCIAL (mantém tudo)
+          8) PROVA SOCIAL (GARANTIDO QUE RENDERIZA)
          ========================= */}
       <section className="py-20 px-4 bg-zinc-950">
         <div className="container mx-auto max-w-6xl">
@@ -873,7 +685,7 @@ export const Home = () => {
               O que editores <span className="text-blue-600">estão falando?</span>
             </h3>
             <p className="text-gray-400 mt-3">
-              Prints reais. Feedback real. Resultados reais.
+              Feedback real de quem já está usando o Arsenal.
             </p>
           </div>
 
@@ -892,11 +704,21 @@ export const Home = () => {
               </div>
             ))}
           </div>
+
+          <div className="flex justify-center mt-14 px-4">
+            <a
+              href={`#${OFFER_SECTION_ANCHOR}`}
+              onClick={handleScroll(OFFER_SECTION_ANCHOR)}
+              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-500 text-white font-black text-sm sm:text-lg px-6 sm:px-10 py-4 sm:py-6 rounded-full transition-all duration-300 hover:scale-105 uppercase shadow-[0_10px_40px_rgba(37,99,235,0.35)] w-full sm:w-auto"
+            >
+              GARANTIR MEU ACESSO AGORA <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 animate-pulse" />
+            </a>
+          </div>
         </div>
       </section>
 
       {/* =========================
-          11) FAQ
+          9) FAQ
          ========================= */}
       <section className="py-20 px-4 bg-black">
         <div className="container mx-auto max-w-3xl">
