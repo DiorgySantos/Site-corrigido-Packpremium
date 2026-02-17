@@ -14,6 +14,7 @@ import {
   Palette,
   BookOpen,
   Rocket,
+  Star,
 } from 'lucide-react';
 import { productData, testimonials, showcaseScenes, resultVideos } from '../mock';
 
@@ -28,11 +29,11 @@ const iconMap = {
   'book-open': BookOpen,
 };
 
-// ✅ Só 2 produtos (Hormozi): Plataforma e Plataforma + Plugin
 const KIWIFY_CHECKOUT_URL = 'https://pay.kiwify.com.br/FGAsVK2'; // Plataforma
 const KIWIFY_CHECKOUT_PLUGIN_URL = 'https://pay.kiwify.com.br/7t7Vix1'; // Plataforma + Plugin
 
 const OFFER_SECTION_ANCHOR = 'oferta';
+const OFFER_SECTION_BONUS_ANCHOR = 'bonus';
 
 export const Home = () => {
   const handleScroll = (id) => (e) => {
@@ -46,6 +47,7 @@ export const Home = () => {
     }
   };
 
+  // Tracking params Kiwify
   useEffect(() => {
     const params = window.location.search;
 
@@ -256,7 +258,15 @@ export const Home = () => {
                     <div className="relative bg-black rounded-[2rem] overflow-hidden aspect-[9/19.5]">
                       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-zinc-900 rounded-b-2xl z-10"></div>
 
-                      <video className="w-full h-full object-cover" autoPlay loop muted playsInline preload="metadata" loading="lazy">
+                      <video
+                        className="w-full h-full object-cover"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="metadata"
+                        loading="lazy"
+                      >
                         <source src={scene.videoUrl} type="video/mp4" />
                       </video>
 
@@ -284,7 +294,8 @@ export const Home = () => {
               </h3>
 
               <p className="text-gray-400 text-base md:text-lg max-w-3xl mx-auto mb-10">
-                Veja o painel funcionando dentro do After Effects / Premiere: pré-visualização, seleção e aplicação rápida.
+                Veja o painel funcionando dentro do After Effects / Premiere: pré-visualização, seleção e aplicação
+                rápida.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -375,7 +386,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          5) RESULTADOS (mantém, mas com copy Hormozi)
+          5) RESULTADOS (mantém TODOS do array)
          ========================= */}
       <section className="py-24 px-4 bg-zinc-950 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-blue-600/5 blur-[100px] pointer-events-none"></div>
@@ -509,7 +520,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          7) SEM vs COM (remove menções a combo/pro)
+          7) SEM vs COM
          ========================= */}
       <section className="py-20 px-4 bg-zinc-950">
         <div className="container mx-auto max-w-6xl">
@@ -519,7 +530,10 @@ export const Home = () => {
                 Sem o Arsenal Cinematográfico você vai...
               </h3>
               {productData.withoutPack.map((item, index) => (
-                <div key={index} className="flex items-start space-x-3 bg-red-950/20 p-4 rounded-lg border border-red-900/30">
+                <div
+                  key={index}
+                  className="flex items-start space-x-3 bg-red-950/20 p-4 rounded-lg border border-red-900/30"
+                >
                   <X className="h-6 w-6 text-red-500 flex-shrink-0 mt-1" />
                   <span className="text-gray-300">{item}</span>
                 </div>
@@ -543,7 +557,10 @@ export const Home = () => {
               </div>
 
               {productData.withPack.map((item, index) => (
-                <div key={index} className="flex items-start space-x-3 bg-green-950/20 p-4 rounded-lg border border-green-900/30">
+                <div
+                  key={index}
+                  className="flex items-start space-x-3 bg-green-950/20 p-4 rounded-lg border border-green-900/30"
+                >
                   <Check className="h-6 w-6 text-green-500 flex-shrink-0 mt-1" />
                   <span className="text-gray-300">{item}</span>
                 </div>
@@ -554,7 +571,105 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          8) OFERTA (2 cards + Value Stack no card principal)
+          8) BÔNUS (restaurado - Hormozi stack)
+         ========================= */}
+      <section id={OFFER_SECTION_BONUS_ANCHOR} className="py-24 px-4 bg-zinc-950 overflow-hidden relative">
+        <div className="hidden md:block absolute top-1/4 left-0 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="hidden md:block absolute bottom-1/4 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div className="container mx-auto max-w-5xl relative z-10">
+          <div className="text-center mb-16">
+            <Badge className="bg-blue-600/10 text-blue-500 border-blue-600/20 mb-6 px-4 py-1 text-base uppercase tracking-wider font-bold">
+              Stack de Valor
+            </Badge>
+            <h3 className="text-4xl md:text-5xl font-black mb-6 text-white tracking-tight leading-tight uppercase">
+              Exclusividades do <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-700">PLATAFORMA + PLUGIN</span>
+            </h3>
+            <p className="text-gray-400 text-xl max-w-2xl mx-auto leading-relaxed">
+              Materiais profissionais que você recebe <span className="text-blue-500 font-bold border-b border-blue-600/50">sem custo adicional</span> ao escolher a oferta mais vendida.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6">
+            {[
+              {
+                title: 'Pack de Efeitos Sonoros Cinematográficos',
+                desc: 'Impactos, transições e ambientes para elevar a imersão e finalizar com estética premium.',
+                price: 'R$ 97,00',
+                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
+              },
+              {
+                title: 'Pack de LUTs Cinematográficas',
+                desc: 'Looks prontos para dar tom de cinema em segundos e manter consistência visual.',
+                price: 'R$ 69,00',
+                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
+              },
+              {
+                title: 'Biblioteca de Hooks & Estruturas',
+                desc: 'Estruturas prontas para acelerar criação, prender atenção e manter ritmo.',
+                price: 'R$ 80,00',
+                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
+              },
+              {
+                title: 'Pack de Overlays (Impacto & Acabamento)',
+                desc: 'Overlays e elementos para dar acabamento, dinamismo e impacto visual.',
+                price: 'R$ 47,00',
+                tag: 'EXCLUSIVIDADE PLATAFORMA + PLUGIN',
+              },
+            ].map((b, idx) => (
+              <div
+                key={idx}
+                className="group relative bg-zinc-900/40 border border-blue-600/30 rounded-3xl p-6 md:p-10 overflow-hidden transition-all duration-500 hover:bg-zinc-900/60 shadow-[0_0_30px_rgba(37,99,235,0.06)]"
+              >
+                <div className="hidden md:block absolute -right-20 -bottom-20 w-[500px] h-[500px] bg-blue-700 blur-[120px] rounded-full pointer-events-none mix-blend-screen opacity-10 group-hover:opacity-20 transition-all duration-700"></div>
+
+                <div className="relative z-10 flex flex-col gap-5">
+                  <div className="flex items-center gap-3">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600/20 text-blue-500 font-bold text-sm border border-blue-600/20">
+                      {idx + 1}
+                    </span>
+                    <span className="text-blue-600 font-bold tracking-wider text-sm uppercase">{b.tag}</span>
+                  </div>
+
+                  <h4 className="text-2xl md:text-4xl font-bold text-white uppercase italic leading-tight">
+                    {b.title}
+                  </h4>
+
+                  <p className="text-gray-400 text-lg leading-relaxed max-w-3xl">{b.desc}</p>
+
+                  <div className="pt-2 flex flex-wrap items-center gap-4">
+                    <div className="bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-2">
+                      <span className="text-gray-500 text-[10px] uppercase block mb-1 font-medium">
+                        Valor Individual
+                      </span>
+                      <span className="text-xl font-bold text-gray-500 line-through italic">{b.price}</span>
+                    </div>
+
+                    <div className="flex items-center font-black text-xs px-5 py-2.5 rounded-lg border bg-blue-600 text-white border-blue-600 shadow-[0_0_15px_rgba(37,99,235,0.35)] uppercase">
+                      <Check className="w-4 h-4 mr-2" />
+                      INCLUSO NO PLATAFORMA + PLUGIN
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex justify-center mt-14 px-4">
+            <a
+              href={`#${OFFER_SECTION_ANCHOR}`}
+              onClick={handleScroll(OFFER_SECTION_ANCHOR)}
+              className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-black text-sm sm:text-lg px-6 sm:px-10 py-4 sm:py-6 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-600/50 w-full sm:w-auto"
+            >
+              QUERO A OFERTA MAIS VENDIDA
+              <ChevronRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================
+          9) OFERTA (2 cards)
          ========================= */}
       <section id={OFFER_SECTION_ANCHOR} className="py-24 px-4 bg-black">
         <div className="container mx-auto max-w-6xl">
@@ -624,7 +739,7 @@ export const Home = () => {
               <p className="text-center text-zinc-500 text-xs mt-3">Acesso imediato</p>
             </div>
 
-            {/* CARD 2 — PLATAFORMA + PLUGIN — VALUE STACK (Hormozi) */}
+            {/* CARD 2 — PLATAFORMA + PLUGIN — VALUE STACK */}
             <div
               id="plano-plugin"
               className="relative bg-zinc-900 border-2 border-blue-600 rounded-[2.5rem] p-8 sm:p-10 flex flex-col shadow-[0_0_50px_rgba(37,99,235,0.25)]"
@@ -648,7 +763,7 @@ export const Home = () => {
                 </p>
               </div>
 
-              {/* Value Stack (com ⚡ e ✔) */}
+              {/* Value Stack */}
               <div className="space-y-4 flex-1 text-sm">
                 <div className="flex items-center gap-3 text-white font-bold">
                   <Zap className="h-5 w-5 text-blue-600" /> Inclui tudo da Plataforma
@@ -729,11 +844,13 @@ export const Home = () => {
                 <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 ml-1 animate-pulse" />
               </a>
 
-              <p className="text-center text-blue-200 text-xs mt-3 font-semibold">Melhor custo-benefício</p>
+              <p className="text-center text-blue-200 text-xs mt-3 font-semibold">
+                Melhor custo-benefício • Oferta mais vendida
+              </p>
             </div>
           </div>
 
-          {/* Garantia (Hormozi: risco reverso) */}
+          {/* Garantia */}
           <div className="mt-12 max-w-4xl mx-auto">
             <div className="p-6 md:p-8 rounded-3xl border border-zinc-800 bg-zinc-950/60 text-center">
               <h4 className="text-xl md:text-2xl font-black text-white mb-2">Garantia de 7 dias</h4>
@@ -747,7 +864,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          9) PROVA SOCIAL (depois do stack)
+          10) PROVA SOCIAL (mantém tudo)
          ========================= */}
       <section className="py-20 px-4 bg-zinc-950">
         <div className="container mx-auto max-w-6xl">
@@ -755,6 +872,9 @@ export const Home = () => {
             <h3 className="text-3xl md:text-4xl font-bold text-white">
               O que editores <span className="text-blue-600">estão falando?</span>
             </h3>
+            <p className="text-gray-400 mt-3">
+              Prints reais. Feedback real. Resultados reais.
+            </p>
           </div>
 
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
@@ -776,7 +896,7 @@ export const Home = () => {
       </section>
 
       {/* =========================
-          10) FAQ
+          11) FAQ
          ========================= */}
       <section className="py-20 px-4 bg-black">
         <div className="container mx-auto max-w-3xl">
